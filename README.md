@@ -15,6 +15,8 @@ A rate limiting library for HTTP APIs built with FastAPI. Supports multiple rate
 ```
 DeepThrottle/
 ├── src/deepthrottle/
+│   ├── __main__.py
+│   ├── __init__.py
 │   ├── api/
 │   │   └── routes.py          # FastAPI endpoints and middleware
 │   ├── algorithms/
@@ -22,8 +24,8 @@ DeepThrottle/
 │   │   ├── leaky_bucket.py    # Leaky bucket implementation
 │   │   └── sliding_window_counter.py  # Sliding window implementation
 │   └── services/
-│       └── ratelimiter_services.py    # RateLimiter wrapper + AlgorithmType enum
-├── main.py
+│       ├── ratelimiter_services.py    # RateLimiter wrapper + AlgorithmType enum
+│       └── benchmark.py    # Benchmarking
 ├── pyproject.toml
 └── README.md
 ```
@@ -44,9 +46,11 @@ uvicorn deepthrottle.api.routes:app --reload
 
 | Method | Path | Description |
 |---|---|---|
+| `middleware` | `http` | Validate API key and rate limit requests |
 | `GET` | `/health` | Health check |
-| `GET` | `/check` | Check if a request is allowed for a given API key |
-| `GET` | `/limits/{key}` | Get rate limit state for a key (planned) |
+| `GET` | `/check/{key}` | Get rate limit state for a key (planned) |
+| `POST` | `/create` | Create a rate limiter for a given key |
+| `DELETE` | `/delete/{key}` | Delete a rate limiter for a given key |
 
 ## Usage
 

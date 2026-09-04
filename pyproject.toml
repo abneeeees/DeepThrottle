@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ablist = "deepthrottle.__main__:main"
+deepthrottle = "deepthrottle.__main__:main"
 
 [build-system]
 requires = ["uv_build>=0.9.26,<0.10.0"]
